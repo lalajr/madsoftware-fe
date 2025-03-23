@@ -1,5 +1,5 @@
 import { groq } from "next-sanity";
-import { client } from "../config/client-config";
+import { client } from "@/sanity/config/client-config";
 import { Navigation } from "@/types/Navigation";
 
 export async function getNavigation(): Promise<Navigation> {

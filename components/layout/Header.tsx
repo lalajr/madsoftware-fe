@@ -14,6 +14,7 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [navigations, setNavigations] = useState<Navigation | null>(null);
   // Add effect to toggle body scroll
   useEffect(() => {
@@ -43,16 +44,28 @@ const Header = () => {
     fetchNavigation();
   }, []);
 
+  // Add effect to handle scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 0);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 transform ${
-      isMegaMenuOpen 
+      isMegaMenuOpen
         ? 'bg-madsoft-charcoal h-screen overflow-y-auto translate-y-0 lg:h-auto lg:overflow-visible' 
-        : 'bg-transparent -translate-y-1'
-    }`}>
-      <div className={`min-w-[320px] max-w-default px-15 mx-auto ${
+        : '-translate-y-1'
+    } ${scrolled ? 'bg-madsoft-charcoal' : 'max-md:bg-transparent'}`}>
+      
+      <div className={`min-w-[320px] ${
         isOpen ? 'bg-madsoft-charcoal h-screen overflow-y-auto lg:h-auto lg:overflow-visible' : 'bg-transparent'
       } transition-all duration-300`}>
-        <div className='px-[16px] py-[18px] lg:py-[28px]'>
+        
+        <div className={`container px-4 mx-auto py-[18px] lg:py-[28px] transition-all duration-300 lg:bg-transparent`}>
           <div className='flex items-center justify-between'>
             <Link href="/">
               <Image src="/logo.svg" alt="Mad Software" width={200} height={40} />

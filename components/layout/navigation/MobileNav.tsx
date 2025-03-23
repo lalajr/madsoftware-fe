@@ -16,13 +16,13 @@ export const MobileNav = ({ isOpen, isServicesOpen, setIsServicesOpen, navigatio
       className={`
         mt-[80px] lg:hidden
         transform transition-all duration-300 ease-in-out
-        ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}
+        ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none z-[-1] fixed'}
         max-h-[calc(100vh-150px)] overflow-y-auto
       `}
     >
       <ul className='space-y-8 text-white text-[24px] leading-1'>
-        {navigations.map((item: NavigationItem) => (
-          <li key={item._id}>
+        {navigations.map((item: NavigationItem, index: number) => (
+          <li key={index}>
             {item.isDropdown ? (
               <>
                 <button 
@@ -34,7 +34,7 @@ export const MobileNav = ({ isOpen, isServicesOpen, setIsServicesOpen, navigatio
                 </button>
                 <div className={`
                   overflow-hidden transition-all duration-300 ease-in-out
-                  ${isServicesOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}
+                  ${isServicesOpen ? 'max-h-screen opacity-100' : 'max-h-[0px] opacity-0'}
                 `}>
                   <ul className='mt-4 space-y-5'>
                     {item.dropdownItems?.map((dropdownItem: DropdownItem) => (

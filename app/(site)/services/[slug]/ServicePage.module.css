@@ -1,0 +1,19 @@
+/* .contentSection h2,
+.contentSection h3,
+.contentSection h4,
+.contentSection h5,
+.contentSection h6 {
+    font-size: 40px;
+
+    @media (min-width: 1024px) {
+        font-size: 32px;
+    }
+}
+
+.contentSection p {
+    font-size: 32px;
+
+    @media (min-width: 1024px) {
+        font-size: 24px;
+    }
+} */
