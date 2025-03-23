@@ -1,10 +1,18 @@
-// import hero from './objects/hero'
-// import trustedBrands from './objects/trustedBrands'
-// import workSection from './objects/workSection'
-// import features from './objects/features'
 import { navigation, navigationItem } from './objects/navigation'
+import { careerContact } from './objects/careerContact'
+import { homepage } from './objects/homepage'
+import { siteSettings } from './objects/siteSettings'
+import { page } from './objects/page'
+import { teamMember } from './objects/team'
+import { service } from './objects/service'
 
 export const schemaTypes = [
+  homepage,
   navigation,
   navigationItem,
+  careerContact,
+  siteSettings,
+  page,
+  teamMember,
+  service
 ]

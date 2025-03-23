@@ -14,8 +14,8 @@ export const DesktopNav = ({ isMegaMenuOpen, setIsMegaMenuOpen, navigations }: D
   return (
     <nav className='hidden lg:block'>
       <ul className='flex items-center space-x-8'>
-        {navigations.map((item: NavigationItem) => (
-          <li className='relative' key={item._id}>
+        {navigations.map((item: NavigationItem, index: number) => (
+          <li key={index} className='relative'>
             {item.isDropdown ? (
               <>
                 <button 
@@ -28,7 +28,7 @@ export const DesktopNav = ({ isMegaMenuOpen, setIsMegaMenuOpen, navigations }: D
 
                 {/* Mega Menu */}
                 <div className={`fixed left-0 right-0 mt-5 bg-madsoft-charcoal shadow-lg transition-all duration-300 py-[80px] px-[100px]
-                  transform ${isMegaMenuOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-4'}`}
+                  transform ${isMegaMenuOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-4 z-[-1]'}`}
                 >
                   <div className='max-w-7xl mx-auto'>
                     <div className='grid grid-cols-2 gap-[24px]'>
@@ -57,7 +57,7 @@ export const DesktopNav = ({ isMegaMenuOpen, setIsMegaMenuOpen, navigations }: D
           </li>
         ))}
         <li>
-          <ButtonWithArrow href="/contact">
+          <ButtonWithArrow href="/contact" className='text-[16px]'>
             Contact Us
           </ButtonWithArrow>
         </li>

@@ -1,19 +1,47 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client'
+
 import Layout from "@/components/layout/Layout";
+import Hero from "@/components/molecules/Hero";
+import ClientsSection from "@/components/molecules/ClientsSection";
+import WorkWithBestSection from "@/components/molecules/WorkWithBestSection";
+import WhatWeDoSection from "@/components/molecules/WhatWeDoSection";
+import CaseStudiesSection from "@/components/molecules/CaseStudiesSection";
+import CareerContactSection from "@/components/molecules/CareerContactSection";
+import { useEffect, useState } from "react";
+import { getHomepage } from "@/sanity/utils/home";
+import { Homepage } from "@/types/Homepage";
+
 export default function Home() {
+  const [homepage, setHomepage] = useState<Homepage | null>(null);
+
+  useEffect(() => {
+    const fetchHomepage = async () => {
+      const homepageObject = await getHomepage();
+      setHomepage(homepageObject);
+    };
+    fetchHomepage();
+  }, []);
+  
   return (
     <Layout>
-      <div className={styles.page}>
-        <div>
-          <div className="bg-crimson h-10 w-10"></div>
-          <div className="bg-madsoft-charcoal h-10 w-10"></div>
-          <div className="bg-soft-white h-10 w-10"></div>
-          <div className="bg-silver-gray h-10 w-10"></div>
-          <div className="bg-deep-charcoal h-10 w-10"></div>
-          <div className="bg-muted-gray h-10 w-10"></div>
-        </div>
-      </div>
+      <section className="hero-section">
+        {homepage && <Hero data={homepage} />}
+      </section>
+      <section className="clients-section">
+        {homepage && <ClientsSection data={homepage.clientsSection} />}
+      </section>
+      <section className="work-with-best-section">
+        {homepage && <WorkWithBestSection data={homepage.workWithBestSection} />}
+      </section>
+      <section className="what-we-do-section">
+        {homepage && <WhatWeDoSection data={homepage.whatWeDoSection} />}
+      </section>
+      <section className="case-studies-section">
+        <CaseStudiesSection />
+      </section>
+      <section className="career-contact-section">
+        <CareerContactSection />
+      </section>
     </Layout>
   );
 }
